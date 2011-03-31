@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HypECR</name>
+    </assembly>
+    <members>
+        <member name="T:HypECR.DataUtil">
+            <summary>
+            class for data utilisation
+            </summary>
+        </member>
+        <member name="M:HypECR.DataUtil.HexToByte(System.String)">
+            <summary>
+            method to convert hex string into a byte array
+            </summary>
+            <param name="msg">string to convert</param>
+            <returns>a byte array</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ByteToHex(System.Byte[])">
+            <summary>
+            method to convert a byte array into a hex string
+            </summary>
+            <param name="comByte">byte array to convert</param>
+            <returns>a hex string</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ConvertToHex(System.String)">
+            <summary>
+            method to convert ascii string to hex string
+            </summary>
+            <param name="asciiString">ascii string to convert</param>
+            <returns>hex string</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ConvertToAscii(System.String)">
+            <summary>
+            method to convert hex string to ascii string
+            </summary>
+            <param name="hexString">hex string to convert</param>
+            <returns>ascii string</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ReturnLRC(System.String)">
+            <summary>
+            method to return the LRC from the message
+            </summary>
+            <param name="pMessage">message to be LRC-ed</param>
+            <returns>LRC</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ConvertToAmountFormat(System.Int32)">
+            <summary>
+            method to convert amount to string formatted
+            </summary>
+            <param name="pAmount">amount</param>
+            <returns>amount string</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.ConvertToLengthFormat(System.Int32)">
+            <summary>
+            method to convert length to string formatted
+            </summary>
+            <param name="pLength">length</param>
+            <returns>length string</returns>
+        </member>
+        <member name="M:HypECR.DataUtil.EncryptStringTripleDES(System.String,System.String)">
+            <summary>
+            method to encrypt string using key and Triple DES
+            </summary>
+            <param name="pKey"></param>
+            <param name="pDataToEncrypt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HypECR.DataUtil.DecryptStringTripleDES(System.String,System.String)">
+            <summary>
+            method to decrypt string using key and Triple DES
+            </summary>
+            <param name="pKey"></param>
+            <param name="pDataToDecrypt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HypECR.HypECRManager">
+            <summary>
+            class for ECR communication
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.ACK">
+            <summary>
+            attribute for ACK
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.STX">
+            <summary>
+            attribute for STX
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.ETX">
+            <summary>
+            attribute for ETX
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.FieldSeparator">
+            <summary>
+            attribute for Field Separator
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_SALE">
+            <summary>
+            value for Transaction Code Sale
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_SALECASH">
+            <summary>
+            value for Transaction Code Sale Cash
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_VOID">
+            <summary>
+            value for Transaction Code Void
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_REFUND">
+            <summary>
+            value for Transaction Code Refund
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_SETTLEMENT">
+            <summary>
+            value for Transaction Code Settlement
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_ONEPURSEPAYMENT">
+            <summary>
+            value for Transaction Code OnePurse payment
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_ONEPURSEVOID">
+            <summary>
+            value for Transaction Code OnePurse Void
+            </summary>
+        </member>
+        <member name="F:HypECR.HypECRManager.TRANSACTION_CODE_COMMTEST">
+            <summary>
+            value for Transaction Code Comm Test
+            </summary>
+        </member>
+        <member name="M:HypECR.HypECRManager.#ctor">
+            <summary>
+            default contructor for HypECRManager
+            </summary>
+        </member>
+        <member name="M:HypECR.HypECRManager.comPort_DataReceived(System.Object,System.IO.Ports.SerialDataReceivedEventArgs)">
+            <summary>
+            method that will be called when theres data waiting in the buffer
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendACK">
+            <summary>
+            method for sending ACK Command
+            </summary>
+            <returns>ACK string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.WaitACK(System.Byte[])">
+            <summary>
+            method for getting ACK
+            </summary>
+            <param name="pACK">byte ACK</param>
+            <returns>is ACK?</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.OpenPort">
+            <summary>
+            method to open port
+            </summary>
+        </member>
+        <member name="M:HypECR.HypECRManager.ClosePort">
+            <summary>
+            method to close port
+            </summary>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendSaleCommand(System.Int32)">
+            <summary>
+            method for send sale command
+            </summary>
+            <param name="pAmount">amount sale</param>
+            <returns>sale command string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendVoidCommand(System.String)">
+            <summary>
+            method for send void command
+            </summary>
+            <param name="pInvoiceNumber">invoice number</param>
+            <returns>void command string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendSaleCashCommand(System.Int32,System.Int32)">
+            <summary>
+            method for send sale cash command
+            </summary>
+            <param name="pAmount">sale amount</param>
+            <param name="pCashBack">cashback amount</param>
+            <returns>sale cashback string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendRefundCommand(System.Int32)">
+            <summary>
+            method for send refund command
+            </summary>
+            <param name="pAmount">refund amount</param>
+            <returns>refund command string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendSettleCommand(System.String)">
+            <summary>
+            method for send settle command
+            </summary>
+            <param name="pNII">NII</param>
+            <returns>settle command string</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendOnePursePaymentCommand(System.Int32)">
+            <summary>
+            method for send OnePurse Payment command
+            </summary>
+            <param name="pAmount">payment amount</param>
+            <returns>OnePurse Payment Command String</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.SendOnePurseVoidCommand">
+            <summary>
+            method for send OnePurse Void command
+            </summary>
+            <returns>OnePurse Void Command String</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.PackMessage(System.String)">
+            <summary>
+            method to pack message for hypercom ECR format
+            </summary>
+            <param name="pMessageData">message to be packed</param>
+            <returns>packed message</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.ExtractMessage(System.String)">
+            <summary>
+            method to extract message and put it in FieldResponse
+            </summary>
+            <param name="pMessage">message to be extracted</param>
+            <returns>field response</returns>
+        </member>
+        <member name="M:HypECR.HypECRManager.DisplayData(HypECR.CommunicationManager.MessageType,System.String)">
+            <summary>
+            method to display the data to and from the port
+            on the screen
+            </summary>
+            <param name="type">MessageType of the message</param>
+            <param name="msg">Message to display</param>
+        </member>
+        <member name="P:HypECR.HypECRManager.BaudRate">
+            <summary>
+            property to hold our TransmissionType
+            of our manager class
+            </summary>
+        </member>
+        <member name="M:HypECR.HypECRManager.SecureECR.ParseMessage(System.String)">
+            <summary>
+            method for parsing Message
+            </summary>
+        </member>
+        <member name="T:HypECR.FieldResponse">
+            <summary>
+            class for Field Response
+            </summary>
+        </member>
+        <member name="M:HypECR.FieldResponse.ParseMessage(System.String)">
+            <summary>
+            method for parsing Message
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.ApprovalCode">
+            <summary>
+            method for calling ApprovalCode
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.ResponseText">
+            <summary>
+            method for calling ResponseText
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.TransactionDate">
+            <summary>
+            method for calling TransactionDate
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.TransactionTime">
+            <summary>
+            method for calling TransactionTime
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.TerminalID">
+            <summary>
+            method for calling TerminalID
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.CardNumber">
+            <summary>
+            method for calling CardNumber
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.ExpiryDate">
+            <summary>
+            method for calling ExpiryDate
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.AmountTransaction">
+            <summary>
+            method for calling AmountTransaction
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.AmountTip">
+            <summary>
+            method for calling AmountTip
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.BatchNumber">
+            <summary>
+            method for calling BatchNumber
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.BatchAmount">
+            <summary>
+            method for calling BatchAmount
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.InvoiceNumber">
+            <summary>
+            method for calling InvoiceNumber
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.MerchantNameAndAddress">
+            <summary>
+            method for calling MerchantNameAndAddress
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.MerchantNumber">
+            <summary>
+            method for calling MerchantNumber
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.CardIssuerName">
+            <summary>
+            method for calling CardIssuerName
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.RetrievalReferenceNumber">
+            <summary>
+            method for calling RetrievalReferenceNumber
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.CardIssuerID">
+            <summary>
+            method for calling CardIssuerID
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.CardHolderName">
+            <summary>
+            method for calling CardHolderName
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.SystemTraceNo">
+            <summary>
+            method for calling SystemTraceNo
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.BatchTotal">
+            <summary>
+            method for calling BatchTotal
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.NII">
+            <summary>
+            method for calling NII
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.TransactionCode">
+            <summary>
+            method for calling TransactionCode
+            </summary>
+        </member>
+        <member name="P:HypECR.FieldResponse.ResponseCode">
+            <summary>
+            method for calling ResponseCode
+            </summary>
+        </member>
+        <member name="T:HypECR.CommunicationManager">
+            <summary>
+            class to hold our communication
+            </summary>
+        </member>
+        <member name="M:HypECR.CommunicationManager.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor to set the properties of our Manager Class
+            </summary>
+            <param name="baud">Desired BaudRate</param>
+            <param name="par">Desired Parity</param>
+            <param name="sBits">Desired StopBits</param>
+            <param name="dBits">Desired DataBits</param>
+            <param name="name">Desired PortName</param>
+        </member>
+        <member name="M:HypECR.CommunicationManager.#ctor">
+            <summary>
+            Comstructor to set the properties of our
+            serial port communicator to nothing
+            </summary>
+        </member>
+        <member name="M:HypECR.CommunicationManager.WriteData(System.String)">
+            <summary>
+            method to write data
+            </summary>
+            <param name="msg">message to be sent</param>
+            <returns>message in formatted style</returns>
+        </member>
+        <member name="M:HypECR.CommunicationManager.OpenPort">
+            <summary>
+            method to open port
+            </summary>
+        </member>
+        <member name="M:HypECR.CommunicationManager.ClosePort">
+            <summary>
+            method to close port
+            </summary>
+        </member>
+        <member name="M:HypECR.CommunicationManager.SetParityValues(System.Object)">
+            <summary>
+            setter Parity values for combobox
+            </summary>
+            <param name="obj">combobox to be set</param>
+        </member>
+        <member name="M:HypECR.CommunicationManager.SetStopBitValues(System.Object)">
+            <summary>
+            setter StopBit values for combobox
+            </summary>
+            <param name="obj">combobox to be set</param>
+        </member>
+        <member name="M:HypECR.CommunicationManager.SetPortNameValues(System.Object)">
+            <summary>
+            setter PortName values for combobox
+            </summary>
+            <param name="obj">combobox to be set</param>
+        </member>
+        <member name="P:HypECR.CommunicationManager.CurrentTransmissionType">
+            <summary>
+            property to hold our TransmissionType
+            of our manager class
+            </summary>
+        </member>
+        <member name="T:HypECR.CommunicationManager.TransmissionType">
+            <summary>
+            enumeration to hold our transmission types
+            </summary>        
+        </member>
+        <member name="T:HypECR.CommunicationManager.MessageType">
+            <summary>
+            enumeration to hold our message types
+            </summary>
+        </member>
+    </members>
+</doc>
