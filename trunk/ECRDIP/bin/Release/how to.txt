@@ -1,0 +1,78 @@
+// contruct HypECRManager
+HypECRManager hypECRManager = new HypECRManager();
+
+
+// sample baud = "9600" par = "None" sBits = "One" dBits = "8" name ="COM1"
+// setup BaudRate
+hypECRManager.CommManager.BaudRate = int.Parse(baud);
+// setup Parity
+hypECRManager.CommManager.Parity = (Parity)Enum.Parse(typeof(Parity), par);
+// setup StopBits
+hypECRManager.CommManager.StopBits = (StopBits)Enum.Parse(typeof(StopBits), sBits);
+// setup DataBits
+hypECRManager.CommManager.DataBits = int.Parse(dBits);
+// setup PortName
+hypECRManager.CommManager.PortName = name;
+
+
+// open port
+hypECRManager.CommManager.OpenPort();
+
+
+// close port
+hypECRManager.CommManager.ClosePort();
+
+
+// flow for sending message to EDC
+int iSaleAmount;
+int iSaleCashAmount;
+int iSaleCashCashBack;
+int iRefundAmount;
+int iOnePursePaymentAmount;
+
+// sale
+hypECRManager.SendSaleCommand(iSaleAmount);
+// void
+hypECRManager.SendVoidCommand(tbInvoiceNumber.Text);
+// sale cash
+hypECRManager.SendSaleCashCommand(iSaleCashAmount, iSaleCashCashBack)
+// refund
+hypECRManager.SendRefundCommand(iRefundAmount);
+// settle
+hypECRManager.SendSettleCommand(tbNII.Text);
+// one purse payment
+hypECRManager.SendOnePursePaymentCommand(iOnePursePaymentAmount);
+// one purse void
+hypECRManager.SendOnePurseVoidCommand();
+
+
+// flow for extracting message from terminal
+HypECRManager.FieldResponse fieldResponse = new HypECRManager.FieldResponse();
+
+int bytes = hypECRManager.CommManager.BytesToRead;
+//create a byte array to hold the awaiting data
+byte[] comBuffer = new byte[bytes];
+//read the data and store it
+hypECRManager.CommManager.Read(comBuffer, 0, bytes);
+
+if (bytes == 1)
+{
+	// waiting fo ACK
+	_isACK = hypECRManager.WaitACK(comBuffer);
+}
+else if (_isACK)
+{
+	string sMessage = HypECR.DataUtil.ByteToHex(comBuffer);
+	if (sMessage.Length != 0)
+	{
+		// data saved in FieldResponse
+		fieldResponse = hypECRManager.ExtractMessage(sMessage);		
+		// send ack
+		hypECRManager.SendACK();
+	}
+}
+
+
+// sample for calling the value in the response
+fieldResponse.ResponseCode;
+fieldResponse.TransactionCode;
